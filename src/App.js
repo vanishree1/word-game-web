@@ -15,17 +15,9 @@ class App extends React.Component {
   onChangeFile = (e) => {
 
     console.log('here', e.target.files[0])
-    let files = e.target.files[0];
-    const fileData = {
-      'lastMod'    : files.lastModified,
-      'lastModDate': files.lastModifiedDate,
-      'name'       : files.name,
-      'size'       : files.size,
-      'type'       : files.type,
-  } 
 
     this.setState({
-      file: fileData
+      file: e.target.files[0]
     })
   }
 
@@ -55,7 +47,7 @@ class App extends React.Component {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
               },
-            body: JSON.stringify({data})
+            body:data 
         }).then(res => {
             console.log('success')
         }).catch(err => {
