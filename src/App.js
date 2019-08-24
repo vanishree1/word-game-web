@@ -24,30 +24,40 @@ class App extends React.Component {
   upload = () => {
     const { file } = this.state;
     console.log('submit file', file)
-    let data = {
-      word: 'abdicate',
-      meaning: 'Give up throne or authority',
-      antonym: '',
-      synonym: ['reject', 
-                  'renounce',
-                  'quit',
-                  'abandon',
-                  'resign',
-                  'give up', 
-                  'forsake',
-              'relinquish'],
-      sentence: 'Spain cannot abdicate the responsibility it has taken on in Iraq',
-      image: file
-  }
+    const formData = new FormData();
+    formData.append('image',file);
+    formData.append('word', 'abdicate');
+    formData.append('meaning', 'Give up throne or authority');
+    formData.append('antonym', '');
+    formData.append('synonym', ['reject', 
+    'renounce',
+    'quit',
+    'abandon',
+    'resign',
+    'give up', 
+    'forsake',
+'relinquish'])
+formData.append('sentence', 'Spain cannot abdicate the responsibility it has taken on in Iraq')
+  //   let data = {
+  //     word: 'abdicate',
+  //     meaning: 'Give up throne or authority',
+  //     antonym: '',
+  //     synonym: ['reject', 
+  //                 'renounce',
+  //                 'quit',
+  //                 'abandon',
+  //                 'resign',
+  //                 'give up', 
+  //                 'forsake',
+  //             'relinquish'],
+  //     sentence: 'Spain cannot abdicate the responsibility it has taken on in Iraq',
+  //     image: file
+  // }
 
-  console.log('data', data.image)
+  // console.log('data', data.image)
   fetch('http://localhost:3001/add-word', {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-              },
-            body:data 
+            body: formData
         }).then(res => {
             console.log('success')
         }).catch(err => {
